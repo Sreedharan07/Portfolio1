@@ -49,9 +49,35 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setSending(true)
-    await new Promise(r => setTimeout(r, 1500))
-    setSending(false)
-    setSent(true)
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE",
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      })
+
+      const result = await response.json()
+      if (result.success) {
+        setSent(true)
+        setForm({ name: '', email: '', message: '' })
+      } else {
+        alert('Something went wrong. Please try again.')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Something went wrong. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
