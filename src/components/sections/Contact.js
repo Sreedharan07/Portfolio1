@@ -27,8 +27,8 @@ const socials = [
   },
   {
     name: 'Email',
-    handle: 'sreedharan@srm.edu',
-    href: 'mailto:sreedharan@srm.edu',
+    handle: 'msreedharan07@gmail.com',
+    href: 'mailto:msreedharan07@gmail.com',
     color: '#FF9FFC',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
