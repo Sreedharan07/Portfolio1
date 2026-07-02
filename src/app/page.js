@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 
 // Dynamic imports for performance
-const ParticleField = dynamic(() => import('@/components/three/ParticleField'), { ssr: false })
+const Galaxy = dynamic(() => import('@/components/three/Galaxy'), { ssr: false })
 const Cursor = dynamic(() => import('@/components/ui/Cursor'), { ssr: false })
 
 import Nav from '@/components/ui/Nav'
@@ -26,9 +26,16 @@ export default function Home() {
       {/* Noise texture overlay */}
       <div className="noise-overlay" />
 
-      {/* Particle background — stays behind everything */}
+      {/* Galaxy background — stays behind everything */}
       <div className="fixed inset-0 z-0" style={{ background: 'var(--color-bg)' }}>
-        <ParticleField />
+        <Galaxy 
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={1.5}
+          glowIntensity={0.5}
+          saturation={0.8}
+          hueShift={240}
+        />
       </div>
 
       {/* Site content */}
