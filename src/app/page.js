@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 
 // Dynamic imports for performance
-const Galaxy = dynamic(() => import('@/components/three/Galaxy'), { ssr: false })
+const Orb = dynamic(() => import('@/components/three/Orb'), { ssr: false })
 const Cursor = dynamic(() => import('@/components/ui/Cursor'), { ssr: false })
 
 import Nav from '@/components/ui/Nav'
@@ -26,15 +26,14 @@ export default function Home() {
       {/* Noise texture overlay */}
       <div className="noise-overlay" />
 
-      {/* Galaxy background — stays behind everything */}
+      {/* Orb background — stays behind everything */}
       <div className="fixed inset-0 z-0" style={{ background: 'var(--color-bg)' }}>
-        <Galaxy 
-          mouseRepulsion={true}
-          mouseInteraction={true}
-          density={1.5}
-          glowIntensity={0.5}
-          saturation={0.8}
-          hueShift={240}
+        <Orb
+          hoverIntensity={0.5}
+          rotateOnHover={true}
+          hue={0}
+          forceHoverState={false}
+          backgroundColor="transparent"
         />
       </div>
 
