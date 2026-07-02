@@ -1,6 +1,9 @@
 'use client'
 import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import dynamic from 'next/dynamic'
+
+const Antigravity = dynamic(() => import('@/components/three/Antigravity'), { ssr: false })
 
 function AnimatedCounter({ target, label, color, suffix = '' }) {
   const ref = useRef(null)
@@ -174,6 +177,35 @@ export default function GitHub() {
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: lang.color }}>{lang.pct}%</span>
                 </div>
               ))}
+            </div>
+          </motion.div>
+
+          {/* Antigravity Visualizer */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4 }}
+            className="lg:col-span-3 glass-card p-6 relative overflow-hidden h-[350px] flex flex-col justify-between"
+          >
+            <div className="absolute inset-0 z-0 pointer-events-auto">
+              <Antigravity
+                count={250}
+                magnetRadius={8}
+                ringRadius={8}
+                waveSpeed={0.5}
+                waveAmplitude={1.2}
+                particleSize={1.5}
+                lerpSpeed={0.08}
+                color={'#7C5CFF'}
+                autoAnimate={true}
+                particleVariance={0.8}
+              />
+            </div>
+            <div className="relative z-10 pointer-events-none select-none">
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: 700 }}>Interactive Particle Field</h3>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-secondary)', letterSpacing: '0.08em', marginTop: '4px' }}>
+                Move mouse to attract and distort the gravity ring
+              </p>
             </div>
           </motion.div>
         </div>
